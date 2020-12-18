@@ -4,7 +4,7 @@ let questions = [
 ]
 
 let answers = [
-    ['55', '50', '49', '52']
+    ['55', '50', '49', '52'],
     ['Rams', 'Steelers', 'Patriots', 'Cowboys']
 ]
 
@@ -16,11 +16,11 @@ panel.addEventListener("click", function (event) {
     event.preventDefault();
 
     if (event.target.classList.contains('answer')) {
-        if(event.target.innerText === correct[0]){
+        if (event.target.innerText === correct[0]) {
             console.log("corect!")
-            
-           nextQuestion(panel)
-        }else {
+
+            nextQuestion(panel)
+        } else {
             console.log("incorrect!")
             event.target.style.background = "red"
         }
@@ -30,13 +30,17 @@ panel.addEventListener("click", function (event) {
 
 answerDiv = document.querySelector('.answer')
 let answerIncrementor = 0;
-function nextQuestion(panel){
-    answerIncrementor++
-    var childDivs = panel.getElementsByTagName('div');
 
-    for( i=0; i< childDivs.length; i++ )
-    {
-      childDivs[i].innerText = correct[answerIncrementor][i]
+function nextQuestion(panel) {
+
+    answerIncrementor++
+    let answerDivs = panel.getElementsByClassName('answer');
+    let quesDivs = panel.getElementsByClassName('question')
+
+    quesDivs[0].innerText = questions[answerIncrementor]
+
+    for (i = 0; i < answerDivs.length; i++) {
+        answerDivs[i].innerText = answers[answerIncrementor][i]
     }
 }
 
