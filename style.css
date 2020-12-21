@@ -5,7 +5,7 @@ body{
 .container{
     background-color: rgb(255, 255, 255);
     display: inline-block;
-    border: 1px solid black;
+    
 }
 
 .question{
@@ -21,14 +21,14 @@ body{
 .answer{
     width: 600px;
     background-color: rgb(67, 77, 95);
-    padding: 35px 20px;
+    padding: 35px 25px;
     text-align: center;
     margin: 20px;
     color: white;
     font-size: 20px;
 }
 
-.controlPanel{
+.next{
     width: 600px;
     background-color: rgb(67, 77, 95);
     padding: 35px 20px;
