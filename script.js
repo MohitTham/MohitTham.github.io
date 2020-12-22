@@ -24,7 +24,7 @@ let questionIncrementor = 0;
 //scorekeeper
 let score = 0;
 
-scoreboard = document.querySelector("score")
+scoreboard = document.querySelector(".score")
 panel = document.querySelector("body")
 
 //when something is clicked
@@ -35,34 +35,39 @@ panel.addEventListener("click", function (event) {
     if (event.target.classList.contains('answer')) {
 
         //if the answer clicked text matches the correct answer in the array do the following
-        if (answerIncrementor < correct.length-1) {
+        if (answerIncrementor < correct.length - 1) {
             if (event.target.innerText === correct[answerIncrementor]) {
 
                 event.target.style.background = "green"
                 event.target.style.fontWeight = "bold";
-                event.target.innerText =  correct[answerIncrementor] + " correct"
+                event.target.innerText = correct[answerIncrementor] + " correct"
                 //console.log("correct")
-                
+
                 //update the score
                 score = score + 100;
                 console.log(score)
                 scoreboard.innerText = `Score: ${score}`
-                
-              //incorrect gives a red div block  
+
+                //incorrect gives a red div block  
             } else {
                 console.log("incorrect!")
                 event.target.style.background = "red"
+                
             }
-          //reached last question game is over  
+            //reached last question game is over  
         } else {
             console.log("game over")
-            //gameOver()
+            gameOver()
         }
-    }else if (event.target.classList.contains('next')){
-        nextQuestion(panel)
-        console.log("hello")
+    } else if (event.target.classList.contains('next')) {
+        nextQuestion(panel)    
+    } else if (event.target.classList.contains('reset')) {
+        resetgame()   
     }
 })
+
+let answerDivs = panel.getElementsByClassName('answer');
+let quesDivs = panel.getElementsByClassName('question')
 
 function nextQuestion(panel) {
     //setting the question and answer incrementors to the next number to set up the next question
@@ -70,24 +75,40 @@ function nextQuestion(panel) {
     answerIncrementor++
 
     //getting an array of divs for question and the 4 answers
-    let answerDivs = panel.getElementsByClassName('answer');
-    let quesDivs = panel.getElementsByClassName('question')
+    
 
     //set the 1 length quesDivs array to the value of questions at the current index
+    if(questionIncrementor < correct.length){
     quesDivs[0].innerText = questions[questionIncrementor]
-
+    }else{gameOver()}
     //the same for answer divs/ loop is because of multiple answer divs
     for (i = 0; i < answerDivs.length; i++) {
         answerDivs[i].innerText = answers[answerIncrementor][i]
-        answerDivs[i].style.background = "rgb(67, 77, 95)"
+        answerDivs[i].style.background = "rgb(4, 21, 53)"
         answerDivs[i].style.fontWeight = "normal";
-    }  
+        console.log(answerDivs[i].innerText)
+
+    } 
 
 }
 
-function gameOver(){
+function gameOver() {
+    gameOverDiv = document.querySelector(".gameover")
+    gameOverDiv.style.display = "block"
 }
 
-function resetgame(){
+function resetgame() {
+    answerIncrementor = 0;
+    questionIncrementor = 0;
+    quesDivs[0].innerText = questions[questionIncrementor]
+
+    for (i = 0; i < answerDivs.length; i++) {
+        answerDivs[i].innerText = answers[answerIncrementor][i]
+        answerDivs[i].style.background = "rgb(4, 21, 53)"
+        answerDivs[i].style.fontWeight = "normal";
+    }
+
+    score = 0;
+    scoreboard.innerText = `Score: ${score}`
 
 }
