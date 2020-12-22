@@ -20,7 +20,7 @@ let correct = ['55', 'Patriots', 'Dolphins', 'Lamar Jackson', '1967']
 //incrementors 
 let answerIncrementor = 0;
 let questionIncrementor = 0;
-
+let clickCounter = 0;
 //scorekeeper
 let score = 0;
 
@@ -33,9 +33,9 @@ panel.addEventListener("click", function (event) {
 
     //check to see if answer is being clicked
     if (event.target.classList.contains('answer')) {
-
+        clickCounter++
         //if the answer clicked text matches the correct answer in the array do the following
-        if (answerIncrementor < correct.length - 1) {
+        if (answerIncrementor <= correct.length - 1) {
             if (event.target.innerText === correct[answerIncrementor]) {
 
                 event.target.style.background = "green"
@@ -43,16 +43,20 @@ panel.addEventListener("click", function (event) {
                 event.target.innerText = correct[answerIncrementor] + " correct"
                 //console.log("correct")
 
-                //update the score
-                score = score + 100;
-                console.log(score)
-                scoreboard.innerText = `Score: ${score}`
 
+                //update the score
+                if (clickCounter < 2) {
+                    score = score + 100;
+                    console.log(score)
+                    scoreboard.innerText = `Score: ${score}`
+                } else { 
+                    score = score + 0
+                }
+                
                 //incorrect gives a red div block  
             } else {
                 console.log("incorrect!")
                 event.target.style.background = "red"
-                
             }
             //reached last question game is over  
         } else {
@@ -60,9 +64,9 @@ panel.addEventListener("click", function (event) {
             gameOver()
         }
     } else if (event.target.classList.contains('next')) {
-        nextQuestion(panel)    
+        nextQuestion(panel)
     } else if (event.target.classList.contains('reset')) {
-        resetgame()   
+        resetgame()
     }
 })
 
@@ -73,31 +77,29 @@ function nextQuestion(panel) {
     //setting the question and answer incrementors to the next number to set up the next question
     questionIncrementor++
     answerIncrementor++
-
-    //getting an array of divs for question and the 4 answers
-    
+    clickCounter = 0
 
     //set the 1 length quesDivs array to the value of questions at the current index
-    if(questionIncrementor < correct.length){
-    quesDivs[0].innerText = questions[questionIncrementor]
-    }else{gameOver()}
+    if (questionIncrementor < correct.length) {
+        quesDivs[0].innerText = questions[questionIncrementor]
+    } else { gameOver() }
     //the same for answer divs/ loop is because of multiple answer divs
     for (i = 0; i < answerDivs.length; i++) {
         answerDivs[i].innerText = answers[answerIncrementor][i]
         answerDivs[i].style.background = "rgb(4, 21, 53)"
         answerDivs[i].style.fontWeight = "normal";
         console.log(answerDivs[i].innerText)
-
-    } 
-
+    }
 }
 
+gameOverDiv = document.querySelector(".gameover")
+
 function gameOver() {
-    gameOverDiv = document.querySelector(".gameover")
     gameOverDiv.style.display = "block"
 }
 
 function resetgame() {
+    clickCounter = 0
     answerIncrementor = 0;
     questionIncrementor = 0;
     quesDivs[0].innerText = questions[questionIncrementor]
@@ -107,8 +109,8 @@ function resetgame() {
         answerDivs[i].style.background = "rgb(4, 21, 53)"
         answerDivs[i].style.fontWeight = "normal";
     }
-
     score = 0;
     scoreboard.innerText = `Score: ${score}`
+    gameOverDiv.style.display = "none"
 
 }
