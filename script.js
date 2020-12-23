@@ -47,12 +47,18 @@ panel.addEventListener("click", function (event) {
                 //update the score
                 if (clickCounter < 2) {
                     score = score + 100;
-                    console.log(score)
                     scoreboard.innerText = `Score: ${score}`
-                } else { 
+                } else if (clickCounter == 2) {
+                    score = score + 50;
+                    scoreboard.innerText = `Score: ${score}`
+                }
+                else if (clickCounter == 3) {
+                    score = score + 25;
+                    scoreboard.innerText = `Score: ${score}`
+                } else {
                     score = score + 0
                 }
-                
+
                 //incorrect gives a red div block  
             } else {
                 console.log("incorrect!")
@@ -96,6 +102,7 @@ gameOverDiv = document.querySelector(".gameover")
 
 function gameOver() {
     gameOverDiv.style.display = "block"
+    scoreboard.style.fontSize = "40px"
 }
 
 function resetgame() {
@@ -110,6 +117,7 @@ function resetgame() {
         answerDivs[i].style.fontWeight = "normal";
     }
     score = 0;
+    scoreboard.style.fontSize = "20px"
     scoreboard.innerText = `Score: ${score}`
     gameOverDiv.style.display = "none"
 
