@@ -23,3 +23,4 @@ This program implements a feature for clicking the next question, a feature for 
 - CSS
 
 ![](screenshots/Project1ss.png)
+<img src="screenshots/Project1ss.png">
