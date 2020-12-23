@@ -88,14 +88,15 @@ function nextQuestion(panel) {
     //set the 1 length quesDivs array to the value of questions at the current index
     if (questionIncrementor < correct.length) {
         quesDivs[0].innerText = questions[questionIncrementor]
-    } else { gameOver() }
-    //the same for answer divs/ loop is because of multiple answer divs
-    for (i = 0; i < answerDivs.length; i++) {
+        for (i = 0; i < answerDivs.length; i++) {
         answerDivs[i].innerText = answers[answerIncrementor][i]
         answerDivs[i].style.background = "rgb(4, 21, 53)"
         answerDivs[i].style.fontWeight = "normal";
         console.log(answerDivs[i].innerText)
     }
+    } else { gameOver() }
+    //the same for answer divs/ loop is because of multiple answer divs
+    
 }
 
 gameOverDiv = document.querySelector(".gameover")
