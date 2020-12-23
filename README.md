@@ -22,4 +22,3 @@ This program implements a feature for clicking the next question, a feature for 
 - HTML
 - CSS
 
-<img src="Project1ss.png" alt="My cool logo"/>
